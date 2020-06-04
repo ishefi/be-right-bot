@@ -1,0 +1,7 @@
+attr
+boto
+mock
+nltk
+pytest
+pytest-cov
+requests

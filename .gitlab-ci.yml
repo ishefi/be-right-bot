@@ -1,0 +1,29 @@
+stages:
+  - test
+  - deploy
+
+test-branch:
+  image: python:3.6
+  stage: test
+  before_script:
+  - python -V
+  - wget https://bootstrap.pypa.io/get-pip.py
+  - python get-pip.py
+  - pip install -r requirements.txt
+  script:
+    - python runtests.py --cache-clear --cov-report=html --cov=.
+  artifacts:
+    paths:
+      - htmlcov
+
+pages:
+  only:
+  - master
+  stage: deploy
+  script:
+  - mkdir -p public && cp index.html public/
+  - mkdir public/site && cp -r site/ public/
+  artifacts:
+    paths:
+    - public
+

@@ -1,0 +1,130 @@
+<html>
+<head>
+    <link href="site/index.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136385563-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+        gtag('config', 'UA-136385563-1');
+    </script>
+
+</head>
+
+<body>
+
+<section id="app">
+    <div id="form-container" class="main-div">
+        <h1>
+            BE RIGHT BOT
+        </h1>
+        <p style="font-size: 36px">
+            <img src="site/img/WhatsApp.png" height="36" width="36">
+            &#10140; &#129302; &#10140;
+            <img src="site/img/Telegram.png" height="36" width="36">
+        </p>
+        <div class="list big">
+            <ul>
+                <li>Upload your WhatsApp chat</li>
+                <li>We will learn you*</li>
+                <li>You'll have a Telegram bot that can speak just like you**</li>
+            </ul>
+            <br>
+            <p class="comment" align="">* The only data we save is 2-word phrases frequency
+                <br>
+                ** well, <i>almost</i> like you</p>
+        </div>
+        <tr>
+            <td>
+                <label for="fileToLoad" class="custom-file-upload">
+                    <i class="fa fa-upload" style="font-size:36px"></i>
+                </label>
+                <input id="fileToLoad" type="file" class="no-display" accept=".txt" @change="loadFileAsText"/>
+                <p v-if="fileName!=''" id="fileName"> {{fileName}} </p>
+                <a v-if="speakers.length==0 && !botCreated" href="#howto-whatsapp" id="howtoWhatsapp"> <br> Not sure what to do?</a>
+        </tr>
+
+        <p id=inputTextToSave></p>
+
+        <p v-if="botCreated" id="createBotSuccess"> Bot created succesfully</p>
+        <div v-if="speakers.length>0" id="step-2">
+            <div class="dropdown">
+                <td>Choose a participant from the chat:</td>
+                <select id=speakerList v-model="selectedSpeaker">
+                    <option v-for="option in speakers" :value="option" >
+                        {{ option }}
+                    </option>
+                </select>
+            </div>
+            <br>
+
+            <div class="dropdown">
+                <input id=botToken v-model="botToken" placeholder="Enter your bot token"> <br> <a href="#howto-telegram">Not sure what to do?</a>
+                <br>
+                <br>
+                <button v-if="botToken!=''" id="createBot" @click="sendText" class="btn btn-primary">create bot</button>
+            </div>
+        </div>
+
+    </div>
+    <br>
+</section>
+
+<section id="howto-whatsapp">
+    <div class="main-div">
+        <h2>How to Download WhatsApp Chat</h2>
+        <div class="list">
+            <ul>
+                <li>Go to the WhatsApp chat you want to botify.</li>
+                <li>Click on options <img src="site/img/whatsapp_options.png"></li>
+                <li>Click on <b>More</b></li>
+                <img class="howto" src="site/img/more.png">
+                <li>Click on <b>Export Chat</b></li>
+                <img class="howto" src="site/img/export.png">
+                <li>Choose <b>Without Media</b></li>
+                <img class="howto" src="site/img/nomedia.png">
+                <li>Email the chat to yourself</li>
+                <li>Download the chat and upload it <a href="#app">here</a></li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<br>
+<section id="howto-telegram">
+    <div class="main-div">
+        <h2>How to Create a Telegram Bot and Retrieve Its Token</h2>
+        <div class="list">
+            <ul>
+                <li>Talk to <a href="https://telegram.me/botfather" target="_blank"><b>Botfather</b> on Telegram</a>
+                </li>
+                <li>Use the <b>/newbot</b> command and name your bot.</li>
+                <img class="howto" src="site/img/newbot.png">
+                <li>Copy the token Botfather gave you and paste it <a href="#app">here</a>.</li>
+                <img class="howto" src="site/img/botoken.png">
+
+            </ul>
+        </div>
+    </div>
+</section>
+
+
+<!--<div>-->
+<!--<p>-->
+<!--It goes back and reads through all the things the've ever said on Whatsapp. The system does the rest-->
+<!--</p>-->
+
+<!--</div>-->
+<script src="site/script.js"></script>
+
+
+</body>
+
+</html>
